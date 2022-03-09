@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+    <div class="row">
+        <form class="form-inline" method="post" novalidate>
+            <div class="input-group " style="" >
+                <div class="input-group-prepend url-form" >
+                    {% csrf_token %}
+                    {{ url_form }}
+                </div >
+                <button class="input-group-text url-btn"  type="submit">go</button>
+            </div>
+        </form>
+
+    </div>
+    <div class="row">
+        <div class="col-lg-4">
+            <div class="box-element product" >
+                <img class="thumbnail" src="{% static 'images/test.jpg' %}">
+
+            </div>
+        </div>
+
+        <div class="col-lg-8">
+            <div class="box-element product" >
+                <h6 class="right-side">Exchange Rates 1,920 T</h6>
+                <h6 ><strong>Product</strong></h6>
+                <hr>
+                <h6 class="right-side">sizes sizes</h6>
+                <h6>please pick the size</h6>
+                <hr>
+                <h5 class="right-side">40.00 TL</h5>
+                <h6>selected size is : XL</h6>
+                <hr>
+                <h4 class="right-side">100,000 TOMAN</h4>
+                <button class="btn btn-outline-secondary add-btn">Add to Cart</button>
+
+            </div>
+        </div>
+    </div>
+{% endblock %}
