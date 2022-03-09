@@ -3,6 +3,18 @@
 
 {% block content %}
     <div class="row">
+        <form class="form-inline" method="post" novalidate>
+            <div class="input-group " style="" >
+                <div class="input-group-prepend url-form" >
+                    {% csrf_token %}
+                    {{ url_form }}
+                </div >
+                <button class="input-group-text url-btn"  type="submit">go</button>
+            </div>
+        </form>
+
+    </div>
+    <div class="row">
         <div class="col-lg-4">
             <div class="box-element product" >
                 <img class="thumbnail" src="{% static 'images/test.jpg' %}">

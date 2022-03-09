@@ -1,12 +1,10 @@
 from django.shortcuts import render
 from django.views import View
-from .forms import TrendyolUrlForm
 
 
 class StoreView(View):
-    url_form = TrendyolUrlForm()
     template_name = 'store/store.html'
-    context = {'url_form': url_form}
+    context = {}
 
     def get(self, request):
         return render(request, self.template_name, self.context)
