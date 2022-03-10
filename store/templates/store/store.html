@@ -3,28 +3,18 @@
 
 {% block content %}
     <div class="row">
+        {% for product in products %}
         <div class="col-lg-4">
+            <img class="thumbnail-store" src="{{product.imageURL}}">
             <div class="box-element product" >
-                <img class="thumbnail" src="{% static 'images/test.jpg' %}">
+                <h6><strong>{{product.name}}</strong></h6>
+                <hr>
 
-            </div>
-        </div>
-
-        <div class="col-lg-8">
-            <div class="box-element product" >
-                <h6 class="right-side">Exchange Rates 1,920 T</h6>
-                <h6 ><strong>Product</strong></h6>
-                <hr>
-                <h6 class="right-side">sizes sizes</h6>
-                <h6>please pick the size</h6>
-                <hr>
-                <h5 class="right-side">40.00 TL</h5>
-                <h6>selected size is : XL</h6>
-                <hr>
-                <h4 class="right-side">100,000 TOMAN</h4>
                 <button class="btn btn-outline-secondary add-btn">Add to Cart</button>
-
+                <a class="btn btn-outline-success" href="#">View</a>
+                <h4 style="display: inline-block; float: right;"><strong>${{product.price|floatformat:2}}</strong></h4>
             </div>
         </div>
+        {% endfor %}
     </div>
 {% endblock %}
