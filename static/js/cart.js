@@ -6,8 +6,8 @@ for (var i = 0; i < updateBtns.length; i++){
         var action = this.dataset.action
         console.log('productId:', productId, 'action:', action)
 
-        console.log('user:', user)
-        if (user === 'AnonymousUser'){
+        console.log('USER:', user)
+        if (user == 'AnonymousUser'){
             console.log('User is not logged in')
         }else{
             updateUserOrder(productId, action)

@@ -19,7 +19,7 @@ class StoreView(View):
             items = []
             order = {'get_cart_total': 0, 'get_cart_items': 0}
             cartItems = order['get_cart_items']
-        context = {'products': self.products, 'cartItems': cartItems}
+        context = {'products': self.products, 'cartItems': cartItems, 'shipping': False}
         return render(request, self.template_name, context)
 
     def post(self, request):
@@ -32,7 +32,7 @@ class StoreView(View):
             items = []
             order = {'get_cart_total': 0, 'get_cart_items': 0}
             cartItems = order['get_cart_items']
-        context = {'products': self.products, 'cartItems': cartItems}
+        context = {'products': self.products, 'cartItems': cartItems, 'shipping': False}
         return render(request, self.template_name, context)
 
 
@@ -49,7 +49,7 @@ class CartView(View):
             items = []
             order = {'get_cart_total': 0, 'get_cart_items': 0}
             cartItems = order['get_cart_items']
-        context = {'items': items, 'order': order, 'cartItems': cartItems}
+        context = {'items': items, 'order': order, 'cartItems': cartItems, 'shipping': False}
         return render(request, self.template_name, context)
 
     def post(self, request):
@@ -62,7 +62,7 @@ class CartView(View):
             items = []
             order = {'get_cart_total': 0, 'get_cart_items': 0}
             cartItems = order['get_cart_items']
-        context = {'items': items, 'order': order, 'cartItems': cartItems}
+        context = {'items': items, 'order': order, 'cartItems': cartItems, 'shipping': False}
         return render(request, self.template_name, context)
 
 
@@ -80,7 +80,7 @@ class CheckoutView(View):
             items = []
             order = {'get_cart_total': 0, 'get_cart_items': 0}
             cartItems = order['get_cart_items']
-        context = {'items': items, 'order': order, 'cartItems': cartItems}
+        context = {'items': items, 'order': order, 'cartItems': cartItems, 'shipping': False}
         return render(request, self.template_name, context)
 
     def post(self, request):
@@ -93,7 +93,7 @@ class CheckoutView(View):
             items = []
             order = {'get_cart_total': 0, 'get_cart_items': 0}
             cartItems = order['get_cart_items']
-        context = {'items': items, 'order': order, 'cartItems': cartItems}
+        context = {'items': items, 'order': order, 'cartItems': cartItems ,'shipping': False}
         return render(request, self.template_name, context)
 
 
