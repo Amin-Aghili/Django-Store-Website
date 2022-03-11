@@ -7,6 +7,7 @@
     <div class="col-lg-6">
         <div class="box-element" id="form-wrapper">
             <form action="" id="form">
+                {% csrf_token %}
                 <div id="user-info">
                     <div class="form-field">
                         <input class="form-control" type="text" name="name" placeholder="Name.." required>
@@ -30,7 +31,7 @@
                         <input class="form-control" type="text" name="state" placeholder="State.." required>
                     </div>
                     <div class="form-field">
-                        <input class="form-control" type="text" name="zip" placeholder="Zip.." required>
+                        <input class="form-control" type="text" name="zipcode" placeholder="Zip.." required>
                     </div>
                     <div class="form-field">
                         <input class="form-control" type="text" name="country" placeholder="Country.." required>
@@ -72,6 +73,7 @@
 
 <script type="text/javascript">
     var shipping = '{{ order.shipping }}'
+    var total = '{{ order.get_cart_total }}'
 
         if (shipping == 'False'){
         document.getElementById('shipping-info').innerHTML = ''
@@ -87,6 +89,11 @@
     }
 
     var form = document.getElementById('form')
+
+    csfrtoken = form.getElementsByTagName('input')[0].value
+    console.log('Newtoken:', form.getElementsByTagName('input')[0].value)
+
+
     form.addEventListener('submit', function(e){
         e.preventDefault()
         console.log('form submitted')
@@ -100,6 +107,51 @@
 
     function submitFormData(){
         console.log('Payment button clicked')
+
+        var userFormData ={
+            'name':null,
+            'email':null,
+            'total':total,
+        }
+
+        var shippingFormData ={
+            'address':null,
+            'city':null,
+            'state':null,
+            'zipcode':null,
+        }
+
+        if (shipping != 'False'){
+            shippingFormData.address = form.address.value
+            shippingFormData.city = form.city.value
+            shippingFormData.state = form.state.value
+            shippingFormData.zipcode = form.zipcode.value
+        }
+
+        if(user == 'AnonymousUser'){
+            userFormData.name = form.name.value
+            userFormData.email = form.email.value
+        }
+
+        var url = '/store/process_order/'
+        fetch(url, {
+        method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRFToken': csrftoken,
+            },
+            body: JSON.stringify({
+                'form': userFormData,
+                'shipping': shippingFormData,
+            })
+        })
+
+        .then((response) => response.json())
+        .then((data) => {
+            console.log('Success:', data)
+            alert('Transaction complete')
+            window.location.href = "{% url 'store:store' %}"
+        })
     }
 
 </script>
