@@ -1,0 +1,74 @@
+.url-form{
+    display: inline-block;
+    width: 60%;
+    margin-left: auto;
+    margin-top: 20px;
+    margin-bottom: 50px;
+}
+
+.url-btn{
+    height:50px;
+    margin-right:auto;
+    margin-top:auto;
+    margin-bottom: 50px;
+}
+
+.center{
+    text-align: center;
+    margin : auto;
+    margin-top: 10px;
+}
+
+
+.box-element{
+    position: relative;
+    display: inline-block;
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.form-div{
+    position: relative;
+    display: inline-block;
+    width: 100%;
+    padding-right: 26px;
+}
+
+
+
+.btn-search{
+    position: absolute;
+    display: block;
+    right: 5px;
+    top: 20px;
+}
+
+
+.bottom-in-mag {
+    position: absolute;
+    right: 0;
+    padding: 10px 6px;
+}
+
+.bottom-in-x {
+    position: absolute;
+    right: 0;
+    padding: 10px 32px;
+}
+
+.magnifying-glass{
+    width: 25px;
+    cursor: pointer;
+    display: block;
+    margin-top: -3px;
+    transition: .1s;
+}
+
+.x{
+    width: 25px;
+    cursor: pointer;
+    display: block;
+    margin-top: -3px;
+    transition: .1s;
+    background-color: #fff;
+}

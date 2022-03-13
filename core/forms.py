@@ -13,7 +13,6 @@ class TrendyolUrlForm(forms.Form):
             attrs={
                 'class': 'form-control',
                 'placeholder': 'https://www.trendyol.com/...',
-                'style': 'height:50px;',
             }
 
         )

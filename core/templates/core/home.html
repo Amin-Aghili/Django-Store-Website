@@ -2,23 +2,24 @@
 {% load static %}
 
 {% block content %}
-    <div class="row">
-        <form class="form-inline" method="post" novalidate>
-            <div class="input-group " style="" >
-                <div class="input-group-prepend url-form" >
-                    {% csrf_token %}
-                    {{ url_form }}
-                </div >
-                <button class="input-group-text url-btn"  type="submit">go</button>
-            </div>
-        </form>
 
+    <div class="col-lg-6 center">
+        <div class="box-element product">
+            <form class="form-div" method="post" novalidate>
+                <i class="bottom-in-x" onclick="clearInput()"><img class="x" src="{% static 'images/x.png' %}"></i>
+                {% csrf_token %}
+                {{ url_form }}
+            </form>
+            <buttton class="btn-search" type="submit" >
+                <img class="magnifying-glass" src="{% static 'images/magnifying-glass.png' %}" alt="">
+            </buttton>
+        </div>
     </div>
+
     <div class="row">
         <div class="col-lg-4">
             <div class="box-element product" >
                 <img class="thumbnail" src="{% static 'images/test.jpg' %}">
-
             </div>
         </div>
 
@@ -39,4 +40,5 @@
             </div>
         </div>
     </div>
+
 {% endblock %}

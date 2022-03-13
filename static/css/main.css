@@ -113,21 +113,6 @@ h1, h2, h3, h4, h5, h6{
     display: none!important;
 }
 
-.url-form{
-    display: inline-block;
-    width: 60%;
-    margin-left: auto;
-    margin-top: 20px;
-    margin-bottom: 50px;
-}
-
-.url-btn{
-    height:50px;
-    margin-right:auto;
-    margin-top:auto;
-    margin-bottom: 50px;
-}
-
 .right-side{
     display: inline-block;
     float: right;
