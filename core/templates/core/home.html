@@ -1,44 +1,60 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load humanize %}
 
 {% block content %}
 
     <div class="col-lg-6 center">
         <div class="box-element product">
             <form class="form-div" method="post" novalidate>
-                <i class="bottom-in-x" onclick="clearInput()"><img class="x" src="{% static 'images/x.png' %}"></i>
+<!--                <i class="btn-in-x" onclick="clearInput()"><img class="x" src="{% static 'images/x.png' %}"></i>-->
+            <button class="btn-in-mag"  type="submit"><img class="magnifying-glass" src="{% static 'images/magnifying-glass.png' %}"></button>
                 {% csrf_token %}
-                {{ url_form }}
+                {{ form_url }}
+
             </form>
-            <buttton class="btn-search" type="submit" >
-                <img class="magnifying-glass" src="{% static 'images/magnifying-glass.png' %}" alt="">
-            </buttton>
+
         </div>
     </div>
-
+{% if image_url %}
     <div class="row">
         <div class="col-lg-4">
             <div class="box-element product" >
-                <img class="thumbnail" src="{% static 'images/test.jpg' %}">
+                <img class="thumbnail" src="{{ image_url }}">
             </div>
         </div>
 
         <div class="col-lg-8">
             <div class="box-element product" >
-                <h6 class="right-side">Exchange Rates 1,920 T</h6>
+                <h6 class="right-side">Exchange Rates {{ exchange_rates|intcomma }} Toman</h6>
                 <h6 ><strong>Product</strong></h6>
                 <hr>
-                <h6 class="right-side">sizes sizes</h6>
-                <h6>please pick the size</h6>
+                {% if sizes %}
+                    <form action="" method="post">
+                        {% csrf_token %}
+                        {% for size in sizes %}
+                            <input class="right-side size-icon btn btn-outline-secondary" type="submit" name="size"  value="{{ size }}">
+                        {% endfor %}
+                    </form>
+
+
+                    <h6>please pick the size</h6>
+                    <br>
+                    <hr>
+                {% endif %}
+
+                <h5 class="right-side">{{ price_tl|intcomma }} TL</h5>
+                {% if selected_size %}
+                    <h6>selected size is : {{selected_size}}</h6>
+                {% endif %}
+                <br>
                 <hr>
-                <h5 class="right-side">40.00 TL</h5>
-                <h6>selected size is : XL</h6>
-                <hr>
-                <h4 class="right-side">100,000 TOMAN</h4>
+                <h4 class="right-side">{{ price|intcomma }} TOMAN</h4>
                 <button class="btn btn-outline-secondary add-btn">Add to Cart</button>
 
             </div>
         </div>
     </div>
+{% endif %}
 
 {% endblock %}

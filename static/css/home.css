@@ -39,34 +39,55 @@
 .btn-search{
     position: absolute;
     display: block;
-    right: 5px;
-    top: 20px;
+    right: 0px;
+    bottom: 5px;
 }
 
 
-.bottom-in-mag {
+.btn-in-mag {
+    background-color: transparent;
+    background-repeat: no-repeat;
+    border: none;
+    cursor: pointer;
+
+    outline: none;
+
     position: absolute;
+    display: block;
+    height: 0px;
+    width: 0px;
     right: 0;
-    padding: 10px 6px;
+    padding: 6px 0px;
 }
 
-.bottom-in-x {
+.btn-in-x {
     position: absolute;
     right: 0;
-    padding: 10px 32px;
+    padding: 32px;
+    margin-bottom: 10px;
 }
 
 .magnifying-glass{
     width: 25px;
     cursor: pointer;
     display: block;
-    margin-top: -3px;
+    margin-bottom: -3px;
+    float: right;
     transition: .1s;
 }
 
 .x{
-    width: 25px;
+    width: 30px;
     cursor: pointer;
+    display: block;
+    margin-top: -3px;
+    transition: .1s;
+    background-color: #fff;
+}
+
+.size-icon{
+    cursor: pointer;
+    text-align: center;
     display: block;
     margin-top: -3px;
     transition: .1s;
