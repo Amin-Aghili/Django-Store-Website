@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.views import View
 from .forms import TrendyolUrlForm
 from .price_trendyol import TrendyolShop
+from .utils import cart_data
 
 
 class HomeView(View):
@@ -12,11 +13,21 @@ class HomeView(View):
     exchange_rates = trendyol.exchange_rates()
 
     def get(self, request):
+
+        data = cart_data(request)
+        cart_items = data['cart_items']
         exchange_rates = self.trendyol.exchange_rates()
         form_url = self.form_class_url()
-        return render(request, self.template_name, {'form_url': form_url, 'exchange_rates': exchange_rates})
+        context = {
+            'form_url': form_url,
+            'exchange_rates': exchange_rates,
+            'cart_items': cart_items,
+        }
+        return render(request, self.template_name, context)
 
     def post(self, request):
+        data = cart_data(request)
+        cart_items = data['cart_items']
         form_url = self.form_class_url(request.POST)
         selected_size = request.POST.get('size')
         if selected_size:
@@ -34,7 +45,8 @@ class HomeView(View):
                     'price': price,
                     'image_url': image_url,
                     'selected_size': selected_size,
-                    'price_tl': price_tl
+                    'price_tl': price_tl,
+                    'cart_items': cart_items,
                 }
             )
         else:
@@ -56,6 +68,7 @@ class HomeView(View):
                                     'price': price,
                                     'image_url': image_url,
                                     'price_tl': price_tl,
+                                    'cart_items': cart_items,
                                 }
                             )
                         else:
@@ -68,6 +81,7 @@ class HomeView(View):
                                     'price': price,
                                     'image_url': image_url,
                                     'price_tl': price_tl,
+                                    'cart_items': cart_items,
                                 }
                             )
             return render(request, self.template_name, {'form_url': form_url})

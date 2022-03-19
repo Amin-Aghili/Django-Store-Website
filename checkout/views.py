@@ -18,7 +18,7 @@ class CheckoutView(View):
 
     def post(self, request):
         data = cart_data(request)
-        cart_items = data['cartItems']
+        cart_items = data['cart_items']
         order = data['order']
         items = data['items']
 
