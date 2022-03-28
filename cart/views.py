@@ -5,18 +5,23 @@ from core.utils import cart_data
 import json
 from products.models import Product
 from order.models import Order, OrderItem
+from core.views import online_shop
 
 
 class CartView(View):
     template_name = 'cart/cart.html'
 
     def get(self, request):
-        data = cart_data(request)
-        cart_items = data['cart_items']
-        order = data['order']
-        items = data['items']
+        try:
+            data = cart_data(request)
+            cart_items = data['cart_items']
+            order = data['order']
+            items = data['items']
+            context = {'items': items, 'order': order, 'cart_items': cart_items, 'shipping': False}
 
-        context = {'items': items, 'order': order, 'cart_items': cart_items, 'shipping': False}
+        except:
+            context = {'items': [], 'order': 0, 'cart_items': 0, 'shipping': False}
+
         return render(request, self.template_name, context)
 
     def post(self, request):
@@ -31,23 +36,24 @@ class CartView(View):
 
 class UpdateItemView(View):
     def get(self, request):
-        data = json.loads(request.body)
-        product_id = data['product_id']
-        action = data['action']
-        print(action)
-        print(product_id)
-
-        return JsonResponse('Item was added to cart', safe=False)
+        # data = json.loads(request.body)
+        # product_id = data['product_id']
+        # action = data['action']
+        # print(action)
+        # print(product_id)
+        #
+        # return JsonResponse('Item was added to cart', safe=False)
+        pass
 
     def post(self, request):
         data = json.loads(request.body)
         product_id = data['product_id']
         action = data['action']
-        print(action)
-        print(product_id)
-
-        customer = request.user.customer  # get the customer???????
-        product = Product.objects.get(id=product_id)
+        customer = request.user
+        if not product_id.isdigit() and action == 'add':
+            product = online_shop()
+        else:
+            product = Product.objects.get(id=product_id)
         order, created = Order.objects.get_or_create(customer=customer, complete=False)
         order_item, created = OrderItem.objects.get_or_create(order=order, product=product)
 

@@ -17,9 +17,8 @@ def cookie_cart(request):
 
     for i in cart:
         try:
-            cart_items += cart[i]['quantity']
-
             product = Product.objects.get(id=i)
+            cart_items += cart[i]['quantity']
             total = (product.price * cart[i]['quantity'])
 
             order['get_cart_total'] += total
@@ -31,6 +30,7 @@ def cookie_cart(request):
                     'name': product.name,
                     'price': product.price,
                     'imageURL': product.imageURL,
+                    'size': product.size,
                 },
                 'quantity': cart[i]['quantity'],
                 'get_total': total,
@@ -41,22 +41,24 @@ def cookie_cart(request):
                 order['shipping'] = True
         except:
             pass
-
+    print('CART ITEMS:', items)
     return {'cart_items': cart_items, 'order': order, 'items': items}
 
 
 def cart_data(request):
-    if request.user.is_authenticated:
-        customer = request.user.customer
-        order, created = Order.objects.get_or_create(customer, complete=False)
-        items = order.orderitem_set.all()
-        cart_items = order.get_cart_items
-    else:
-        cookie_data = cookie_cart(request)
-        cart_items = cookie_data['cart_items']
-        order = cookie_data['order']
-        items = cookie_data['items']
-    return {'cart_items': cart_items, 'order': order, 'items': items}
+    try:
+        if request.user.is_authenticated:
+            order, created = Order.objects.get_or_create(customer=request.user, complete=False)
+            items = order.orderitem_set.all()
+            cart_items = order.get_cart_items
+        else:
+            cookie_data = cookie_cart(request)
+            cart_items = cookie_data['cart_items']
+            order = cookie_data['order']
+            items = cookie_data['items']
+        return {'cart_items': cart_items, 'order': order, 'items': items}
+    except:
+        pass
 
 
 def guest_order(request, data):

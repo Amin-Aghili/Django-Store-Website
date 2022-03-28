@@ -40,17 +40,26 @@
 
                     <h6>please pick the size</h6>
                     <br>
+
+                    {% if selected_size %}
+                        <hr>
+                        <h5 class="right-side">{{ price_tl|intcomma|floatformat:2 }} TL</h5>
+                        <h6>selected size is : {{selected_size}}</h6>
+                        <br>
+                        <hr>
+                        <h4 class="right-side">{{ price|intcomma }} TOMAN</h4>
+                        <button data-product="{{ product.id }}" data-action="add" class="btn btn-outline-secondary add-btn update-cart">Add to Cart</button>
+
+                    {% endif %}
+                {% else %}
+                    <h5 class="right-side">{{ price_tl|floatformat:2|intcomma }} TL</h5>
+                    <br>
                     <hr>
+                    <h4 class="right-side">{{ price|intcomma }} TOMAN</h4>
+                    <button data-product="{{ product.id }}" data-action="add" class="btn btn-outline-secondary add-btn update-cart">Add to Cart</button>
+
                 {% endif %}
 
-                <h5 class="right-side">{{ price_tl|intcomma|floatformat:0}} TL</h5>
-                {% if selected_size %}
-                    <h6>selected size is : {{selected_size}}</h6>
-                {% endif %}
-                <br>
-                <hr>
-                <h4 class="right-side">{{ price|intcomma }} TOMAN</h4>
-                <button data-product="{{ product.id }}" data-action="add" class="btn btn-outline-secondary add-btn update-cart">Add to Cart</button>
 
             </div>
         </div>

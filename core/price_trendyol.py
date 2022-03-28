@@ -111,4 +111,3 @@ class TrendyolShop:
 
     def close(self):
         self.driver.quit()
-

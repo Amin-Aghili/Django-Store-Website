@@ -1,5 +1,7 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load humanize %}
+
 
 {% block content %}
 
@@ -7,14 +9,13 @@
     <div class="col-lg-12">
         <div class="box-element">
             <a class="btn btn-outline-dark" href="{% url 'store:store' %}">&#x2190;Continue Shopping</a>
-
             <br>
-            <hr>
+            <br>
 
             <table class="table">
                 <tr>
                     <th><h5>Items: <strong>{{ order.get_cart_items }}</strong></h5></th>
-                    <th><h5>Total: <strong>${{ order.get_cart_total|floatformat:2 }}</strong></h5></th>
+                    <th><h5>Total: <strong>{{ order.get_cart_total|intcomma }} Toman </strong></h5></th>
                     <th>
                         <a style="float:right; margin:5px;" class="btn btn-success" href="{% url 'checkout:checkout' %}">Checkout</a>
                     </th>
@@ -29,6 +30,7 @@
             <div class="cart-row">
                 <div style="flex:2;"></div>
                 <div style="flex:2"><strong>Item</strong></div>
+                <div style="flex:2"><strong>Size</strong></div>
                 <div style="flex:1"><strong>Price</strong></div>
                 <div style="flex:1"><strong>Quantity</strong></div>
                 <div style="flex:1"><strong>Total</strong></div>
@@ -38,7 +40,8 @@
             <div class="cart-row">
                 <div style="flex:2;"><img class="row-image" src="{{ item.product.imageURL }}"></div>
                 <div style="flex:2">{{ item.product.name }}</div>
-                <div style="flex:1">${{ item.product.price|floatformat:2 }}</div>
+                <div style="flex:2">{{ item.product.size }}</div>
+                <div style="flex:1">{{ item.product.price|intcomma }}</div>
                 <div style="flex:1">
                     <div class="quantity">
                         <img data-product="{{item.product.id}}" data-action="add" class="chg-quantity update-cart" src="{% static 'images/arrow-up.png' %}">
@@ -46,11 +49,14 @@
                     </div>
                     <p class="quantity-num">{{ item.quantity }}</p>
                 </div>
-                <div style="flex:1"><p>${{ item.get_total|floatformat:2 }}</p></div>
+                <div style="flex:1"><p>{{ item.get_total|intcomma }} Toman</p></div>
             </div>
             {% endfor %}
         </div>
     </div>
 </div>
+
+
+{{ image_url }}
 
 {% endblock %}
